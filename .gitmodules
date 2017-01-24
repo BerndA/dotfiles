@@ -1,0 +1,9 @@
+[submodule "zsh/zsh/zgen"]
+	path = zsh/zsh/zgen
+	url = https://github.com/tarjoilija/zgen.git
+[submodule "zsh/zgen"]
+	path = zsh/zgen
+	url = https://github.com/tarjoilija/zgen.git
+[submodule "powerline_fonts"]
+	path = powerline_fonts
+	url = https://github.com/powerline/fonts
