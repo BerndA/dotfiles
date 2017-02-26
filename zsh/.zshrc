@@ -38,7 +38,7 @@ export DEFAULT_USER="$USER"
 
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
 
-if [ -d ${HOME}/anaconda3/bin ]; then
-  export PATH=${HOME}/anaconda3/bin:${PATH}
+if [ -d ${HOME}/miniconda2/bin ]; then
+  export PATH=${HOME}/miniconda2/bin:${PATH}
 fi
 
