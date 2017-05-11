@@ -17,6 +17,7 @@ zgen oh-my-zsh plugins/command-not-found
 zgen oh-my-zsh plugins/tmux
 zgen oh-my-zsh plugins/profiles
 zgen oh-my-zsh plugins/rsync
+zgen oh-my-zsh plugins/docker
 
 # Syntax highlighting bundle.
 zgen load zsh-users/zsh-syntax-highlighting
@@ -36,7 +37,7 @@ esac
 # hide username@host in prompt
 export DEFAULT_USER="$USER"
 
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
+export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
 
 if [ -d ${HOME}/miniconda2/bin ]; then
   export PATH=${HOME}/miniconda2/bin:${PATH}
