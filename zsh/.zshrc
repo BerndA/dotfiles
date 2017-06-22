@@ -13,7 +13,7 @@ zgen oh-my-zsh
 zgen oh-my-zsh plugins/git
 zgen oh-my-zsh plugins/git-flow
 zgen oh-my-zsh plugins/pip
-zgen oh-my-zsh plugins/command-not-found
+#zgen oh-my-zsh plugins/command-not-found
 zgen oh-my-zsh plugins/tmux
 zgen oh-my-zsh plugins/profiles
 zgen oh-my-zsh plugins/rsync
@@ -43,3 +43,8 @@ if [ -d ${HOME}/miniconda2/bin ]; then
   export PATH=${HOME}/miniconda2/bin:${PATH}
 fi
 
+alias ssh-agent-proxy='if [[ -e ~/.ssh-agent-proxy ]]; then source ~/.ssh-agent-proxy; fi; ssh-add -l'
+alias ssh-agent-proxy-set='echo export SSH_AUTH_SOCK=${SSH_AUTH_SOCK} > ~/.ssh-agent-proxy'
+
+alias sshap=ssh-agent-proxy
+alias sshaps=ssh-agent-proxy-set
