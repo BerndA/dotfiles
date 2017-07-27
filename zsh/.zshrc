@@ -11,7 +11,8 @@ zgen oh-my-zsh
 
 # Bundles from the default repo (robbyrussell's oh-my-zsh).
 zgen oh-my-zsh plugins/git
-zgen oh-my-zsh plugins/git-flow
+zgen oh-my-zsh plugins/git-flow-avh
+zgen oh-my-zsh plugins/git-prompt
 zgen oh-my-zsh plugins/pip
 #zgen oh-my-zsh plugins/command-not-found
 zgen oh-my-zsh plugins/tmux
