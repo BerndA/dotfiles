@@ -10,7 +10,6 @@ if ! zgen saved; then
 zgen oh-my-zsh
 
 # Bundles from the default repo (robbyrussell's oh-my-zsh).
-zgen oh-my-zsh plugins/git
 zgen oh-my-zsh plugins/git-flow-avh
 zgen oh-my-zsh plugins/git-prompt
 zgen oh-my-zsh plugins/pip
@@ -52,4 +51,13 @@ alias sshaps=ssh-agent-proxy-set
 
 alias docker-cc=docker rm $(docker ps -a -fstatus=exited -q)
 alias docker-ci=docker rmi $(docker images -f "dangling=true" -q)
+
+docker_debug() {
+	docker commit $1 docker_debug/debug_image && docker run --rm -it docker_debug/debug_image /bin/bash
+}
+alias docker-debug=docker_debug
+
+#sudo stuff
+alias service='sudo service'
+alias iptables='sudo iptables'
 
