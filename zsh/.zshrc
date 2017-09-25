@@ -49,8 +49,8 @@ alias ssh-agent-proxy-set='echo export SSH_AUTH_SOCK=${SSH_AUTH_SOCK} > ~/.ssh-a
 alias sshap=ssh-agent-proxy
 alias sshaps=ssh-agent-proxy-set
 
-alias docker-cc=docker rm $(docker ps -a -fstatus=exited -q)
-alias docker-ci=docker rmi $(docker images -f "dangling=true" -q)
+alias docker-cc='docker rm $(docker ps -a -fstatus=exited -q)'
+alias docker-ci='docker rmi $(docker images -f "dangling=true" -q)'
 
 docker_debug() {
 	docker commit $1 docker_debug/debug_image && docker run --rm -it docker_debug/debug_image /bin/bash
