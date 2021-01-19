@@ -1,9 +1,8 @@
 powerline-daemon -q
-. /usr/lib/python3.8/site-packages/powerline/bindings/zsh/powerline.zsh
+. /usr/share/powerline/bindings/zsh/powerline.zsh
 
 # load zgen
-[[ -f ${HOME}/.zgen/zgen.zsh ]] && source "${HOME}/.zgen/zgen.sh"
-[[ -f /usr/share/zsh/share/zgen.zsh ]] && source /usr/share/zsh/share/zgen.zsh
+[[ -f /usr/share/zgen/zgen.zsh ]] && source /usr/share/zgen/zgen.zsh
 
 # if the init scipt doesn't exist
 if ! zgen saved; then
@@ -46,8 +45,11 @@ if [ -d ${HOME}/miniconda2/bin ]; then
   export PATH=${HOME}/miniconda2/bin:${PATH}
 fi
 
-source /usr/share/fzf/key-bindings.zsh
-source /usr/share/fzf/completion.zsh
+   # `fzf`'s “**blah”-completion behaviour, ⌘T, etc.
+if whence fzf >/dev/null; then
+   zgen load junegunn/fzf shell/completion.zsh
+   zgen load junegunn/fzf shell/key-bindings.zsh
+fi
 
 alias preview="fzf --preview 'bat --color \"always\" {}'"
 # add support for ctrl+o to open selected file in VS Code

@@ -1,9 +1,0 @@
-#! /bin/sh
-#
-# install.sh
-#
-# Distributed under terms of the MIT license.
-#
-
-
-git clone https://github.com/VundleVim/Vundle.vim.git ./bundle/Vundle.vim
