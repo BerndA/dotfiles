@@ -18,7 +18,6 @@ zgen oh-my-zsh plugins/git-flow
 zgen oh-my-zsh plugins/pip
 zgen oh-my-zsh plugins/command-not-found
 zgen oh-my-zsh plugins/tmux
-zgen oh-my-zsh plugins/profiles
 zgen oh-my-zsh plugins/rsync
 
 # Syntax highlighting bundle.
