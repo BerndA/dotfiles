@@ -1,16 +1,17 @@
 #!/usr/bin/env bash
+set -x
 
 TOOLBOX_IMAGE=localhost/bernda/toolbox:latest
 TOOLBOX_DIR=/home/bernda/repos/dotfiles/toolbox
 
 build() {
-  container=$(buildah from ubuntu:21.04)
+  container=$(buildah --net=host from ubuntu:22.10)
   # run apt non-interactive
   # configure buildah to use only chroot since we are already inside a user ns
-  buildah config --env LANG=POSIX --env DEBIAN_FRONTEND="noninteractive" --env _BUILDAH_STARTED_IN_USERNS="" --env BUILDAH_ISOLATION=chroot ${container} 
+  buildah config --env LANG=POSIX --env _BUILDAH_STARTED_IN_USERNS="" --env BUILDAH_ISOLATION=chroot ${container} 
   buildah run $container --  sh -c '\
 	  apt update && \
-          apt install -y \
+	  apt install -y \
 	      bat \
 	      buildah \
 	      curl \
@@ -51,3 +52,4 @@ enter() {
 }
 
 #enter
+build
