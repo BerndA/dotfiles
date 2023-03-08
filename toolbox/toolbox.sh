@@ -9,7 +9,7 @@ build() {
   # run apt non-interactive
   # configure buildah to use only chroot since we are already inside a user ns
   buildah config --env LANG=POSIX --env _BUILDAH_STARTED_IN_USERNS="" --env BUILDAH_ISOLATION=chroot ${container} 
-  buildah run $container --  sh -c '\
+  buildah run $container -- bash -c '\
 	  apt update && \
 	  apt install -y \
 	      bat \
@@ -25,7 +25,6 @@ build() {
 	      skopeo \
 	      tig \
 	      tmux \
-	      tmuxinator \
 	      podman \
 	      powerline \
 	      prettyping \
