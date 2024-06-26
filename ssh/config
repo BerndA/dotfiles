@@ -1,19 +1,14 @@
-Host lineldeserv01
-Hostname lineldeserv01.roseninspection.net
-ForwardAgent yes
-User bahues
+Include ~/.ssh/conf.d/*.cfg
 
-Host seco_test
-Hostname 192.168.137.99
-User root
+Host *
+    UserKnownHostsFile ~/.ssh/known_hosts.d/%k
+    CanonicalizeHostname yes
+    ControlPath ~/.ssh/cmasters/%r@%h:%p
+    ControlMaster auto
+    ControlPersist 120
+    IdentitiesOnly yes
+    IdentityFile %d/.ssh/keys/id_%h_%r
+    ForwardAgent no
 
-Host seco
-Hostname 192.168.137.10
-User root
-StrictHostKeyChecking no
-
-Host *+*
+#Host *+*
   ProxyCommand ssh $(echo %h | sed 's/+[^+]*$//;s/\([^+%%]*\)%%\([^+]*\)$/\2 -l \1/;s/:/ -p /') exec nc -w1 $(echo %h | sed 's/^.*+//;/:/!s/$/ %p/;s/:/ /')
-
-#Host *.roseninspection.net
-#User bahues
