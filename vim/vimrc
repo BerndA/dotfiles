@@ -85,4 +85,4 @@ command! -range=% -nargs=0 Tab2Space execute '<line1>,<line2>s#^\t\+#\=repeat(" 
 command! -range=% -nargs=0 Space2Tab execute '<line1>,<line2>s#^\( \{'.&ts.'\}\)\+#\=repeat("\t", len(submatch(0))/' . &ts . ')'
 map <F7> mzgg=G`z
 
-
+autocmd BufWritePre * :%s/\s\+$//e
