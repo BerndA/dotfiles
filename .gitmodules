@@ -1,5 +1,5 @@
 [submodule "zsh/zgen"]
-	path = zsh/zgen
+	path = .config/zsh/zgen
 	url = https://github.com/tarjoilija/zgen.git
 [submodule "powerline_fonts"]
 	path = powerline_fonts
