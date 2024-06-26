@@ -1,5 +1,5 @@
 # load zgen
-#source "${HOME}/locale.sh"
+[ -s "${HOME}/locale.sh" ] && source "${HOME}/locale.sh"
 source "${HOME}/.zgen/zgen.zsh"
 #source "/usr/share/zgen/zgen.zsh"
 
