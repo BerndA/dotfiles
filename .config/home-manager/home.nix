@@ -140,6 +140,10 @@
       source $HOME/.config/zsh/zshrc
     fi";
   };
+
+  programs.fzf = {
+    enableZshIntegration = true;
+  };
   
   programs.rofi.pass = {
     enable = true;
