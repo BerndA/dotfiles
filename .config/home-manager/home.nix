@@ -18,42 +18,52 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
     pkgs.azure-cli
     pkgs.bat
     pkgs.btop
-    pkgs.brave
+    pkgs.binwalk
     pkgs.curl
     pkgs.crun
-    pkgs.docker
-    pkgs.element-desktop
+    #pkgs.docker
+    pkgs.docker-credential-helpers
+    pkgs.dhex
     pkgs.fd
-    #pkgs.firefox
-    #pkgs.git
-    pkgs.graphviz
+    pkgs.fzf
+    pkgs.gh
     pkgs.gitFull
+    pkgs.git-cliff
+    pkgs.git-sizer
+    pkgs.git-filter-repo
+    pkgs.graphviz
     pkgs.gnupg
     pkgs.htop
     pkgs.jq
     pkgs.libyubikey
-    pkgs.micromamba
     pkgs.nss
     pkgs.opensc
+    pkgs.openssh
+    pkgs.navi
     pkgs.podman
+    pkgs.poetry
+    pkgs.python3Full
     pkgs.ripgrep
     pkgs.rdfind
     pkgs.rofi
     pkgs.rofi-pass
     pkgs.skopeo
+    pkgs.ssss
+    pkgs.sshpass
     pkgs.tig
-    pkgs.tsocks
     pkgs.tmux
     pkgs.tmuxp
+    pkgs.up
     pkgs.yubico-piv-tool
     pkgs.watson
     pkgs.zsh
+
+    #graphical stuff (disabled)
+    #pkgs.firefox
+    #pkgs.element-desktop
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -85,18 +95,9 @@
   };
 
   # Raw configuration files
-  home.file.".zshrc".source = ~/data/repos/dotfiles/zsh/.zshrc;
-  home.file.".zshenv".source = ~/data/repos/dotfiles/zsh/.zshenv;
+  home.file.".config/zsh/zshrc".source = ~/data/repos/dotfiles/.config/zsh/zshrc;
+  home.file.".zshenv".source = ~/data/repos/dotfiles/.config/zsh/zshenv;
 
-  # You can also manage environment variables but you will have to manually
-  # source
-  #
-  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  /etc/profiles/per-user/bahues/etc/profile.d/hm-session-vars.sh
-  #
   # if you don't want to manage your shell through Home Manager.
   home.sessionVariables = {
     EDITOR = "nvim";
@@ -133,9 +134,20 @@
     enable = true;
     autocd = true;
     enableAutosuggestions = true;
+    initExtra = "
+    if [ -f $HOME/.config/zsh/zshrc ];
+    then
+      source $HOME/.config/zsh/zshrc
+    fi";
   };
   
-  programs.rofi.pass.enable = true;
+  programs.rofi.pass = {
+    enable = true;
+    extraConfig = ''
+    '';
+  #home.file.".config/rofi-pass/config".source = ~/data/repos/dotfiles/.config/rofi-pass/config;
+  };
+
   programs.tmux.enable = true;
   
 #  programs.vscode = {
