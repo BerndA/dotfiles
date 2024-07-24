@@ -152,13 +152,24 @@
   #home.file.".config/rofi-pass/config".source = ~/data/repos/dotfiles/.config/rofi-pass/config;
   };
 
-  programs.tmux.enable = true;
+  programs.tmux = {
+   enable = true;
+   extraConfig = ''
+   bind-key -T prefix C-g split-window \
+  "$SHELL --login -i -c 'navi --print | head -n 1 | tmux load-buffer -b tmp - ; tmux paste-buffer -p -t {last} -b tmp -d'"
+    '';
+
+  };
   
 #  programs.vscode = {
 #    enable = true;
 #    package = pkgs.vscode.fhs;
 #  };
   programs.watson = {
+    enableZshIntegration = true;
+  };
+
+  programs.navi = {
     enableZshIntegration = true;
   };
 }
