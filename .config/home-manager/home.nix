@@ -13,7 +13,7 @@
   # You should not change this value, even if you update Home Manager. If you do
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
-  home.stateVersion = "23.11"; # Please read the comment before changing.
+  home.stateVersion = "24.05"; # Please read the comment before changing.
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -23,6 +23,7 @@
     pkgs.btop
     pkgs.binwalk
     pkgs.curl
+    pkgs.conmon
     pkgs.crun
     #pkgs.docker
     pkgs.docker-credential-helpers
@@ -32,6 +33,7 @@
     pkgs.gh
     pkgs.gitFull
     pkgs.git-cliff
+    pkgs.git-lfs
     pkgs.git-sizer
     pkgs.git-filter-repo
     pkgs.graphviz
@@ -97,6 +99,7 @@
   # Raw configuration files
   home.file.".config/zsh/zshrc".source = ~/data/repos/dotfiles/.config/zsh/zshrc;
   home.file.".zshenv".source = ~/data/repos/dotfiles/.config/zsh/zshenv;
+  #home.file.".config/rofi-pass/config".source = ~/data/repos/dotfiles/.config/rofi-pass/config;
 
   # if you don't want to manage your shell through Home Manager.
   home.sessionVariables = {
@@ -133,23 +136,43 @@
   programs.zsh = {
     enable = true;
     autocd = true;
-    enableAutosuggestions = true;
+    #autosuggestions = {
+    #  enable = true;
+    #};
     initExtra = "
     if [ -f $HOME/.config/zsh/zshrc ];
     then
       source $HOME/.config/zsh/zshrc
     fi";
+
+#    initExtraBeforeCompInit = ''
+      # p10k instant prompt
+#      local P10K_INSTANT_PROMPT="${config.xdg.cacheHome}/p10k-instant-prompt-''${(%):-%n}.zsh"
+#      [[ ! -r "$P10K_INSTANT_PROMPT" ]] || source "$P10K_INSTANT_PROMPT"
+#    '';
+
+    zplug = {
+      enable = true;
+      plugins = [
+        { name = "zsh-users/zsh-autosuggestions"; } # Simple plugin installation
+        { name = "zsh-users/zsh-syntax-highlighting"; } # Simple plugin installation
+      ];
+    };
+    # Syntax highlighting bundle.
+    #oh-my-zsh = {
+    #  enable = true;
+    #  plugins = [ "docker" "git" "git-extras" "profiles" ];
+      #plugins = [ "docker" "git" "git-extras" "profiles" "tmux" ];
+    #};
   };
 
   programs.fzf = {
+    enable = true;
     enableZshIntegration = true;
   };
   
   programs.rofi.pass = {
     enable = true;
-    extraConfig = ''
-    '';
-  #home.file.".config/rofi-pass/config".source = ~/data/repos/dotfiles/.config/rofi-pass/config;
   };
 
   programs.tmux = {
@@ -170,6 +193,7 @@
   };
 
   programs.navi = {
+    enable = true; 
     enableZshIntegration = true;
   };
 }
