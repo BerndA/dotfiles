@@ -4,31 +4,21 @@
 # specify plugins here
 
 # Bundles from the default repo (robbyrussell's oh-my-zsh).
-zplug load plugins/docker, from: oh-my-zsh
-zplug load plugins/git, from: oh-my-zsh
-zplug load plugins/git-extras, from: oh-my-zsh
-zplug load plugins/profiles, from: oh-my-zsh
-zplug load plugins/tmux, from: oh-my-zsh
+#zplug "plugins/git" from: oh-my-zsh
+#zplug "plugins/git-extras" from: oh-my-zsh
+zplug "plugins/docker" from:oh-my-zsh
+zplug "plugins/tmux" from:oh-my-zsh
 
 # Syntax highlighting bundle.
-zplug load zsh-users/zsh-syntax-highlighting
+zplug "zsh-users/zsh-syntax-highlighting"
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-history-substring-search"
 
-zplug load zsh-users/zsh-autosuggestions
-
-#    zplug oh-my-zsh themes/agnoster
-
-    # generate the init script from plugins above
-
-#case "$TERM" in
-#	xterm*) TERM=xterm-256color;;
-#	screen*) TERM=screen-256color-bce;;
-#
-#esac
+#zplug 'dracula/zsh', as:theme
+#zplug load "themes/agnoster, from: oh-my-zsh"
 
 # hide username@host in prompt
-export DEFAULT_USER="$USER"
-
-#export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
+export default_user="$user"
 
 alias docker-cc='docker rm $(docker ps -a -fstatus=exited -q)'
 alias docker-ci='docker rmi $(docker images -f "dangling=true" -q)'
@@ -39,18 +29,17 @@ docker_debug() {
 }
 alias docker-debug=docker_debug
 
-alias ba_git_prune_branches="git fetch -p && git branch -vva | grep ': gone]' | awk '{print $1}' | xargs git branch -d"
-#Find all changes to FILENAME not merged to master:
-alias ba_git_find_all_branches='git for-each-ref --format="%(refname:short)" refs/heads | grep -v master | while read br; do git cherry master $br | while read x h; do if [ \"`git log -n 1 --format=%H $h -- $FILENAME`\" = \"$h\" ]; then echo $br; fi; done; done | sort -u'
+#find all changes to filename not merged to master:
+alias ba_git_find_all_branches='git for-each-ref --format="%(refname:short)" refs/heads | grep -v master | while read br; do git cherry master $br | while read x h; do if [ \"`git log -n 1 --format=%h $h -- $filename`\" = \"$h\" ]; then echo $br; fi; done; done | sort -u'
 
+alias gbg='LANG=C git branch -vv | grep ": gone\]"'
+alias gbgD='LANG=C git branch --no-color -vv | grep ": gone\]" | cut -c 3- | awk '\''{print $1}'\'' | xargs git branch -D'
+alias gbgd='LANG=C git branch --no-color -vv | grep ": gone\]" | cut -c 3- | awk '\''{print $1}'\'' | xargs git branch -d'
+alias gl='git pull'
+alias gp='git push'
+alias gf='git fetch'
 
-[[ -s "$HOME/.local/share/marker/marker.sh" ]] && source "$HOME/.local/share/marker/marker.sh"
-
-export PATH=$PATH:$HOME/bin
-
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-export HISTORY_IGNORE="ls *:cd *:pwd:exit::man*:env*:?:??:df *:du *"
+export history_ignore="ls *:cd *:pwd:exit::man*:env*:?:??:df *:du *"
 
 function azp_git_on() {
     echo "injecting secret for internal server"
@@ -81,3 +70,16 @@ function ba_git_curl_debug(){
     fi
 }
 
+[[ -s "$home/.local/share/marker/marker.sh" ]] && source "$home/.local/share/marker/marker.sh"
+#[[ -f '/usr/share/powerline/bindings/zsh/powerline.zsh' ]] && source /usr/share/powerline/bindings/zsh/powerline.zsh
+#
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
+# Then, source plugins and add commands to $PATH
+zplug load --verbose
