@@ -145,12 +145,6 @@
       source $HOME/.config/zsh/zshrc
     fi";
 
-#    initExtraBeforeCompInit = ''
-      # p10k instant prompt
-#      local P10K_INSTANT_PROMPT="${config.xdg.cacheHome}/p10k-instant-prompt-''${(%):-%n}.zsh"
-#      [[ ! -r "$P10K_INSTANT_PROMPT" ]] || source "$P10K_INSTANT_PROMPT"
-#    '';
-
     zplug = {
       enable = true;
       plugins = [
