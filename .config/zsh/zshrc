@@ -4,8 +4,6 @@
 # specify plugins here
 
 # Bundles from the default repo (robbyrussell's oh-my-zsh).
-#zplug "plugins/git" from: oh-my-zsh
-#zplug "plugins/git-extras" from: oh-my-zsh
 zplug "plugins/docker" from:oh-my-zsh
 zplug "plugins/tmux" from:oh-my-zsh
 
@@ -13,9 +11,6 @@ zplug "plugins/tmux" from:oh-my-zsh
 zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-history-substring-search"
-
-#zplug 'dracula/zsh', as:theme
-#zplug load "themes/agnoster, from: oh-my-zsh"
 
 # hide username@host in prompt
 export default_user="$user"
@@ -37,26 +32,9 @@ alias gbgD='LANG=C git branch --no-color -vv | grep ": gone\]" | cut -c 3- | awk
 alias gbgd='LANG=C git branch --no-color -vv | grep ": gone\]" | cut -c 3- | awk '\''{print $1}'\'' | xargs git branch -d'
 alias gl='git pull'
 alias gp='git push'
-alias gf='git fetch'
+alias gf='git fetch -ftp'
 
 export history_ignore="ls *:cd *:pwd:exit::man*:env*:?:??:df *:du *"
-
-function azp_git_on() {
-    echo "injecting secret for internal server"
-    B64=$(echo -n $USER:$(pass show ${INTERNAL_GIT_SERVER}/AZP_CODE_TOKEN) | base64 -w0 )
-    export GIT_EXTRA_HEADER="Authorization: Basic $B64"
-    alias git='git -c http.extraheader=$GIT_EXTRA_HEADER'
-}
-
-function azp_git(){
-
-    if [[ $(git remote get-url --all origin | sed "s!https://${INTERNAL_GIT_SERVER}/.*!internal!") == "internal" ]]; then
-        azp_git_on
-    else
-        alias git=git
-        export AZP_CODE_TOKEN=
-    fi
-}
 
 function ba_git_curl_debug(){
     if [[ -z "$GIT_CURL_VERBOSE" ]]; then
@@ -71,7 +49,8 @@ function ba_git_curl_debug(){
 }
 
 [[ -s "$home/.local/share/marker/marker.sh" ]] && source "$home/.local/share/marker/marker.sh"
-#[[ -f '/usr/share/powerline/bindings/zsh/powerline.zsh' ]] && source /usr/share/powerline/bindings/zsh/powerline.zsh
+[[ -f '/usr/share/powerline/bindings/zsh/powerline.zsh' ]] && source /usr/share/powerline/bindings/zsh/powerline.zsh
+
 #
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
