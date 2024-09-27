@@ -2,7 +2,6 @@ export ZSH_TMUX_AUTOSTART="true"
 export ZSH_TMUX_AUTOQUIT="false"
 export EDITOR=nvim
 export VISUAL=${EDITOR}
-export INTERNAL_GIT_SERVER=tfs.roseninspection.net
 export LOCALE_ARCHIVE=/usr/lib/locale/locale-archive
 
 if [ -e /home/bahues/.nix-profile/etc/profile.d/nix.sh ]; then . /home/bahues/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
