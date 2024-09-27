@@ -3,8 +3,8 @@
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "bahues";
-  home.homeDirectory = "/home/bahues";
+  home.username = "bernd";
+  home.homeDirectory = "/home/bernd";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -136,9 +136,9 @@
   programs.zsh = {
     enable = true;
     autocd = true;
-    #autosuggestions = {
-    #  enable = true;
-    #};
+    autosuggestion = {
+      enable = true;
+    };
     initExtra = "
     if [ -f $HOME/.config/zsh/zshrc ];
     then
@@ -172,8 +172,7 @@
   programs.tmux = {
    enable = true;
    extraConfig = ''
-   bind-key -T prefix C-g split-window \
-  "$SHELL --login -i -c 'navi --print | head -n 1 | tmux load-buffer -b tmp - ; tmux paste-buffer -p -t {last} -b tmp -d'"
+    source-file $HOME/data/repos/dotfiles/.config/tmux/tmux.conf
     '';
 
   };
