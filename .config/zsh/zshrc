@@ -15,8 +15,6 @@ zplug "zsh-users/zsh-history-substring-search"
 # hide username@host in prompt
 export default_user="$user"
 
-alias docker-cc='docker rm $(docker ps -a -fstatus=exited -q)'
-alias docker-ci='docker rmi $(docker images -f "dangling=true" -q)'
 alias rg=rgrep
 
 docker_debug() {
