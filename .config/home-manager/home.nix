@@ -31,6 +31,7 @@
     pkgs.fd
     pkgs.fzf
     pkgs.gh
+    pkgs.git-absorb
     pkgs.gitFull
     pkgs.git-cliff
     pkgs.git-lfs
