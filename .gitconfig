@@ -1,0 +1,50 @@
+# This is Git's per-user configuration file.
+[diff]
+	tool = vimdiff
+[merge]
+	log = 20
+[core]
+	autocrlf = input
+	eol = lf
+[push]
+	default = simple
+    followTags = true
+	recurseSubmodules = check
+	autoSetupRemote = true
+[alias]
+	tree = log --graph --pretty=format:'%Cred%h%Creset - %C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an> %Creset' --abbrev-commit
+	d = difftool
+[pull]
+	ff = only
+	rebase = merges
+[difftool]
+    prompt = true
+    # Be able to abort all diffs with `:cq` or `:cquit`
+    trustExitCode = true
+
+[fetch]
+    prune = true
+
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+
+[color]
+	ui = auto
+
+[include]
+    path = ~/.config/git/local
+
+[init]
+	defaultBranch = main
+
+[protocol "file"]
+	allow = always
+
+[alias]
+  st = status
+  ci = commit
+  br = branch
+  co = checkout
