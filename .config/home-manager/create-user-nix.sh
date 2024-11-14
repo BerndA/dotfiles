@@ -2,6 +2,6 @@
 #
 cat << EOF > user.nix
 {
- home.username = "$USER"
+ home.username = "$USER";
 }
 EOF
