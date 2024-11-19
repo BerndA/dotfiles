@@ -1,0 +1,10 @@
+[Unit]
+Description=Execute task every hour
+
+[Timer]
+OnCalendar=hourly
+
+Unit=anacron.service
+
+[Install]
+WantedBy=timers.target 

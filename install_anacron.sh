@@ -10,5 +10,25 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 @monthly 15 monthly-cron nice run-parts --report ${HOME}/.anacron/cron.monthly
 EOF
 
-echo @hourly /usr/sbin/anacron -s -t $HOME/.anacron/anacrontab -S $HOME/.anacron/spool | crontab -e 
+MODE=cron
+
+case MODE in
+    systemd)
+        mkdir -p ${HOME}/.config/systemd/user
+        DOTFILES=$(pwd)
+        pushd ${HOME}/.config/systemd/user
+        ln -s ${DOTFILES}/.config/systemd/user/anacron.service . 
+        ln -s ${DOTFILES}/.config/systemd/user/anacron.timer . 
+        popd
+        systemctl --user daemon-reload
+        systemctl --user enable anacron.timer
+        systemctl --user start anacron.timer
+        ;;
+    cron)
+        echo @hourly /usr/sbin/anacron -s -t $HOME/.anacron/anacrontab -S $HOME/.anacron/spool | crontab -e 
+        ;;
+    *)
+        echo "unknown use case" ; exit 1
+esac
+
 

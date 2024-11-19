@@ -1,0 +1,9 @@
+[Unit]
+Description=Run anacron
+
+[Service]
+Type=simple
+ExecStart=/usr/sbin/anacron -s -t $HOME/.anaconr/anacrontab -S $HOME/.anacron/spool 
+
+[Install]
+WantedBy=multi-user.target
