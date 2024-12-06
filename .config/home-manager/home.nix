@@ -20,8 +20,9 @@
   home.packages = [
     pkgs.azure-cli
     pkgs.bat
-    pkgs.btop
     pkgs.binwalk
+    pkgs.btop
+    pkgs.buku
     pkgs.curl
     pkgs.conmon
     pkgs.crun
@@ -48,7 +49,9 @@
     pkgs.navi
     pkgs.podman
     pkgs.poetry
+    pkgs.pre-commit
     pkgs.python3Full
+    pkgs.python3Packages.pip
     pkgs.ripgrep
     pkgs.rdfind
     pkgs.rofi
@@ -59,6 +62,7 @@
     pkgs.tig
     pkgs.tmux
     pkgs.tmuxp
+    pkgs.trash-cli
     pkgs.up
     pkgs.yubico-piv-tool
     pkgs.watson
@@ -98,9 +102,9 @@
   };
 
   # Raw configuration files
-  home.file.".config/zsh/zshrc".source = ~/data/repos/dotfiles/.config/zsh/zshrc;
-  home.file.".zshenv".source = ~/data/repos/dotfiles/.config/zsh/zshenv;
-  #home.file.".config/rofi-pass/config".source = ~/data/repos/dotfiles/.config/rofi-pass/config;
+  home.file.".config/zsh/zshrc".source = ~/dotfiles/.config/zsh/zshrc;
+  home.file.".zshenv".source = ~/dotfiles/.config/zsh/zshenv;
+  #home.file.".config/rofi-pass/config".source = ~/dotfiles/.config/rofi-pass/config;
 
   # if you don't want to manage your shell through Home Manager.
   home.sessionVariables = {
@@ -141,6 +145,7 @@
       enable = true;
     };
     initExtra = "
+    alias rip=trash
     if [ -f $HOME/.config/zsh/zshrc ];
     then
       source $HOME/.config/zsh/zshrc
@@ -173,7 +178,7 @@
   programs.tmux = {
    enable = true;
    extraConfig = ''
-    source-file $HOME/data/repos/dotfiles/.config/tmux/tmux.conf
+    source-file $HOME/dotfiles/.config/tmux/tmux.conf
     '';
 
   };
