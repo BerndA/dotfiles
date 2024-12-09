@@ -33,7 +33,7 @@
     pkgs.fzf
     pkgs.gh
     pkgs.git-absorb
-    pkgs.gitFull
+    pkgs.git
     pkgs.git-cliff
     pkgs.git-lfs
     pkgs.git-sizer
@@ -104,7 +104,6 @@
   # Raw configuration files
   home.file.".config/zsh/zshrc".source = ~/dotfiles/.config/zsh/zshrc;
   home.file.".zshenv".source = ~/dotfiles/.config/zsh/zshenv;
-  home.file.".gitconfig".source = ~/dotfiles/.gitconfig;
   #home.file.".config/rofi-pass/config".source = ~/dotfiles/.config/rofi-pass/config;
 
   # if you don't want to manage your shell through Home Manager.
@@ -172,9 +171,12 @@
     enableZshIntegration = true;
   };
 
-  #programs.git = {
-   # extraConfig = include.$HOME/dotfiles/.gitconfig;
-  #};
+  programs.git = {
+    enable = true;
+    includes = [
+      { path = "~/dotfiles/.gitconfig"; }
+    ];
+  };
   
   programs.rofi.pass = {
     enable = true;
