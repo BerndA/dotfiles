@@ -104,6 +104,7 @@
   # Raw configuration files
   home.file.".config/zsh/zshrc".source = ~/dotfiles/.config/zsh/zshrc;
   home.file.".zshenv".source = ~/dotfiles/.config/zsh/zshenv;
+  home.file.".gitconfig".source = ~/dotfiles/.gitconfig;
   #home.file.".config/rofi-pass/config".source = ~/dotfiles/.config/rofi-pass/config;
 
   # if you don't want to manage your shell through Home Manager.
@@ -170,6 +171,10 @@
     enable = true;
     enableZshIntegration = true;
   };
+
+  #programs.git = {
+   # extraConfig = include.$HOME/dotfiles/.gitconfig;
+  #};
   
   programs.rofi.pass = {
     enable = true;
