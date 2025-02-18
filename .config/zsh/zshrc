@@ -32,7 +32,7 @@ alias gl='git pull'
 alias gp='git push'
 alias gf='git fetch -ftp'
 alias gco='git checkout'
-alias gpsup='git push --set-upstream $(git rev-parse --abbrec-ref HEAD)'
+alias gpsup='git push --set-upstream $(git rev-parse --abbrev-ref HEAD)'
 
 export history_ignore="ls *:cd *:pwd:exit::man*:env*:?:??:df *:du *"
 
