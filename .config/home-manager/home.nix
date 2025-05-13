@@ -38,6 +38,7 @@
     pkgs.git-lfs
     pkgs.git-sizer
     pkgs.git-filter-repo
+    pkgs.gopass
     pkgs.graphviz
     pkgs.gnupg
     pkgs.htop
@@ -48,10 +49,6 @@
     pkgs.openssh
     pkgs.navi
     pkgs.podman
-    pkgs.poetry
-    pkgs.pre-commit
-    pkgs.python3Full
-    pkgs.python3Packages.pip
     pkgs.ripgrep
     pkgs.rdfind
     pkgs.rofi
@@ -60,6 +57,7 @@
     pkgs.ssss
     pkgs.sshpass
     pkgs.tig
+    pkgs.tio
     pkgs.tmux
     pkgs.tmuxp
     pkgs.trash-cli
