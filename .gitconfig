@@ -35,7 +35,7 @@
 	ui = auto
 
 [include]
-    path = ~/.config/git/include/local
+    path = ~/.config/git/includes/local
 
 [init]
 	defaultBranch = main
@@ -48,3 +48,7 @@
   ci = commit
   br = branch
   co = checkout
+  p  = push --force-with-lease
+  ria = rebase --interactive --autosquash
+  l = pull --rebase --autostash
+  f = fetch --prune-tags --prune
