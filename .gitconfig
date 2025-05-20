@@ -16,7 +16,12 @@
 	d = difftool
 [pull]
 	ff = only
-	rebase = merges
+	rebase = true
+	autoStash = true
+
+[rebase]
+	autoStash = true
+
 [difftool]
     prompt = true
     # Be able to abort all diffs with `:cq` or `:cquit`
