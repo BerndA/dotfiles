@@ -8,12 +8,10 @@
 	eol = lf
 [push]
 	default = simple
-    followTags = true
+	followTags = true
 	recurseSubmodules = check
 	autoSetupRemote = true
-[alias]
-	tree = log --graph --pretty=format:'%Cred%h%Creset - %C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an> %Creset' --abbrev-commit
-	d = difftool
+        forceIfIncludes = true
 [pull]
 	ff = only
 	rebase = true
@@ -23,24 +21,24 @@
 	autoStash = true
 
 [difftool]
-    prompt = true
-    # Be able to abort all diffs with `:cq` or `:cquit`
-    trustExitCode = true
+	prompt = true
+	# Be able to abort all diffs with `:cq` or `:cquit`
+	trustExitCode = true
 
 [fetch]
-    prune = true
+	prune = true
 
 [filter "lfs"]
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
-    smudge = git-lfs smudge -- %f
+	smudge = git-lfs smudge -- %f
 
 [color]
 	ui = auto
 
 [include]
-    path = ~/.config/git/includes/local
+	path = ~/.config/git/includes/local
 
 [init]
 	defaultBranch = main
@@ -49,11 +47,14 @@
 	allow = always
 
 [alias]
-  st = status
-  ci = commit
-  br = branch
-  co = checkout
-  p  = push --force-with-lease
-  ria = rebase --interactive --autosquash
-  l = pull --rebase --autostash
-  f = fetch --prune-tags --prune
+	tree = log --graph --pretty=format:'%Cred%h%Creset - %C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an> %Creset' --abbrev-commit
+	d = difftool
+	st = status
+	ci = commit
+	br = branch
+	co = checkout
+	p  = push --force-with-lease --force-if-includes
+	ria = rebase --interactive --autosquash
+	l = pull --rebase --autostash
+	f = fetch --prune-tags --prune
+    gone = "!f() { git fetch --all --prune; git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D; }; f"

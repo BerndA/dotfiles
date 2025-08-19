@@ -25,13 +25,10 @@ alias docker-debug=docker_debug
 #find all changes to filename not merged to master:
 alias ba_git_find_all_branches='git for-each-ref --format="%(refname:short)" refs/heads | grep -v master | while read br; do git cherry master $br | while read x h; do if [ \"`git log -n 1 --format=%h $h -- $filename`\" = \"$h\" ]; then echo $br; fi; done; done | sort -u'
 
+alias g=git
 alias gbg='LANG=C git branch -vv | grep ": gone\]"'
 alias gbgD='LANG=C git branch --no-color -vv | grep ": gone\]" | cut -c 3- | awk '\''{print $1}'\'' | xargs git branch -D'
 alias gbgd='LANG=C git branch --no-color -vv | grep ": gone\]" | cut -c 3- | awk '\''{print $1}'\'' | xargs git branch -d'
-alias gl='git pull'
-alias gp='git push'
-alias gf='git fetch -ftp'
-alias gco='git checkout'
 alias gpsup='git push --set-upstream $(git rev-parse --abbrev-ref HEAD)'
 
 export history_ignore="ls *:cd *:pwd:exit::man*:env*:?:??:df *:du *"
