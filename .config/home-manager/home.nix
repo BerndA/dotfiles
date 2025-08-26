@@ -101,6 +101,7 @@
   # Raw configuration files
   home.file.".config/zsh/zshrc".source = ~/dotfiles/.config/zsh/zshrc;
   home.file.".zshenv".source = ~/dotfiles/.config/zsh/zshenv;
+  home.file.".ssh/config".source = ~/dotfiles/ssh/config;
   #home.file.".config/rofi-pass/config".source = ~/dotfiles/.config/rofi-pass/config;
 
   # if you don't want to manage your shell through Home Manager.
