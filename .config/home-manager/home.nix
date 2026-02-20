@@ -25,7 +25,6 @@
     pkgs.curl
     pkgs.conmon
     pkgs.crun
-    #pkgs.docker
     pkgs.docker-credential-helpers
     pkgs.dhex
     pkgs.fd
@@ -42,9 +41,8 @@
     pkgs.gnupg
     pkgs.htop
     pkgs.jq
-    pkgs.libyubikey
+    pkgs.lsd
     pkgs.nss
-    pkgs.opensc
     pkgs.openssh
     pkgs.navi
     pkgs.podman
@@ -61,7 +59,6 @@
     pkgs.tmuxp
     pkgs.trash-cli
     pkgs.up
-    pkgs.yubico-piv-tool
     pkgs.watson
     pkgs.zsh
 
@@ -100,13 +97,16 @@
 
   # Raw configuration files
   home.file.".config/zsh/zshrc".source = ~/dotfiles/.config/zsh/zshrc;
-  home.file.".zshenv".source = ~/dotfiles/.config/zsh/zshenv;
+  #home.file.".zshenv".source = ~/dotfiles/.config/zsh/zshenv;
   home.file.".ssh/config".source = ~/dotfiles/ssh/config;
   #home.file.".config/rofi-pass/config".source = ~/dotfiles/.config/rofi-pass/config;
 
   # if you don't want to manage your shell through Home Manager.
   home.sessionVariables = {
     EDITOR = "nvim";
+    VISUAL = "nvim";
+    ZSH_TMUX_AUTOSTART="true";
+    ZSH_TMUX_AUTOQUIT="false";
   };
 
   # Let Home Manager install and manage itself.

@@ -6,7 +6,7 @@ read -p "Enter github email:" GH_EMAIL
 cat << EOF > user.nix
 {
  home.username = "$USER";
- programs.git.userName = "$GH_USER";
- programs.git.userEmail = "$GH_EMAIL";
+ programs.git.settings.user.name = "$GH_USER";
+ programs.git.settings.user.email = "$GH_EMAIL";
 }
 EOF

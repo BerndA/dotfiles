@@ -15,7 +15,9 @@ zplug "zsh-users/zsh-history-substring-search"
 # hide username@host in prompt
 export default_user="$user"
 
-alias rg=rgrep
+if [ ! $(command -v rg) ]; then
+    alias rg=rgrep
+fi
 
 docker_debug() {
 	docker commit $1 docker_debug/debug_image && docker run --rm -it docker_debug/debug_image /bin/bash
@@ -59,3 +61,6 @@ fi
 
 # Then, source plugins and add commands to $PATH
 zplug load --verbose
+
+[ -n "$(command -v bat)" ] && alias cat=bat
+[ -n "$(command -v lsd)" ] && alias ls=lsd
