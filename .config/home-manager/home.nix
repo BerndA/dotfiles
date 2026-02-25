@@ -1,9 +1,13 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
+
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  imports = [ ./user.nix ];
+  imports = [ 
+      ./user.nix
+      ./modules/dotfiles.nix 
+  ];
   home.homeDirectory = "/home/${config.home.username}";
 
   # This value determines the Home Manager release that your configuration is
@@ -96,10 +100,9 @@
   };
 
   # Raw configuration files
-  home.file.".config/zsh/zshrc".source = ~/dotfiles/.config/zsh/zshrc;
+  home.file.".config/zsh/zshrc".source = "${config.dotfiles.repoDir}/.config/zsh/zshrc";
   #home.file.".zshenv".source = ~/dotfiles/.config/zsh/zshenv;
-  home.file.".ssh/config".source = ~/dotfiles/ssh/config;
-  #home.file.".config/rofi-pass/config".source = ~/dotfiles/.config/rofi-pass/config;
+  home.file.".ssh/config".source = "${config.dotfiles.repoDir}/ssh/config";
 
   # if you don't want to manage your shell through Home Manager.
   home.sessionVariables = {
@@ -107,6 +110,7 @@
     VISUAL = "nvim";
     ZSH_TMUX_AUTOSTART="true";
     ZSH_TMUX_AUTOQUIT="false";
+    DOTFILES="home-manager";
   };
 
   # Let Home Manager install and manage itself.
@@ -142,7 +146,7 @@
     autosuggestion = {
       enable = true;
     };
-    initExtra = "
+    initContent= "
     alias rip=trash
     if [ -f $HOME/.config/zsh/zshrc ];
     then
@@ -172,7 +176,7 @@
   programs.git = {
     enable = true;
     includes = [
-      { path = "~/dotfiles/.gitconfig"; }
+      { path = "${config.dotfiles.repoDir}/.gitconfig"; }
     ];
   };
   
@@ -183,7 +187,7 @@
   programs.tmux = {
    enable = true;
    extraConfig = ''
-    source-file $HOME/dotfiles/.config/tmux/tmux.conf
+    source-file "${config.dotfiles.repoDir}/.config/tmux/tmux.conf"
     '';
 
   };

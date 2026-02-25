@@ -3,6 +3,7 @@
 
 # specify plugins here
 
+if [ "$DOTFILES" != "home-manager" ];then
 # Bundles from the default repo (robbyrussell's oh-my-zsh).
 #zplug "plugins/docker" from:oh-my-zsh
 #zplug "plugins/tmux" from:oh-my-zsh
@@ -11,18 +12,18 @@
 zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-history-substring-search"
+fi
 
 # hide username@host in prompt
 export default_user="$user"
 
-if [ ! $(command -v rg) ]; then
-    alias rg=rgrep
-fi
-
+export history_ignore="ls *:cd *:pwd:exit::man*:env*:?:??:df *:du *"
 docker_debug() {
 	docker commit $1 docker_debug/debug_image && docker run --rm -it docker_debug/debug_image /bin/bash
 }
 alias docker-debug=docker_debug
+
+##### GIT #####
 
 #find all changes to filename not merged to master:
 alias ba_git_find_all_branches='git for-each-ref --format="%(refname:short)" refs/heads | grep -v master | while read br; do git cherry master $br | while read x h; do if [ \"`git log -n 1 --format=%h $h -- $filename`\" = \"$h\" ]; then echo $br; fi; done; done | sort -u'
@@ -52,9 +53,15 @@ function ba_git_curl_debug(){
     fi
 }
 
+#####
+[ -n "$(command -v bat)" ] && alias cat=bat
+[ -n "$(command -v lsd)" ] && alias ls=lsd
+[ -z "$(command -v rg)" ] && alias rg=rgrep
+
 [[ -s "$home/.local/share/marker/marker.sh" ]] && source "$home/.local/share/marker/marker.sh"
 [[ -f '/usr/share/powerline/bindings/zsh/powerline.zsh' ]] && source /usr/share/powerline/bindings/zsh/powerline.zsh
 
+if [ "$DOTFILES" != "home-manager" ];then
 #
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
@@ -66,6 +73,10 @@ fi
 
 # Then, source plugins and add commands to $PATH
 zplug load --verbose
+fi
 
-[ -n "$(command -v bat)" ] && alias cat=bat
-[ -n "$(command -v lsd)" ] && alias ls=lsd
+setopt INTERACTIVE_COMMENTS
+setopt APPEND_HISTORY
+setopt INC_APPEND_HISTORY
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
