@@ -33,6 +33,11 @@ alias gbgD='LANG=C git branch --no-color -vv | grep ": gone\]" | cut -c 3- | awk
 alias gbgd='LANG=C git branch --no-color -vv | grep ": gone\]" | cut -c 3- | awk '\''{print $1}'\'' | xargs git branch -d'
 alias gpsup='git push --set-upstream $(git rev-parse --abbrev-ref HEAD)'
 
+if [ -n "$(command -v xsel)" ];then
+    alias pbcopy='xsel --clipboard --input'
+    alias pbpaste='xsel --clipboard --output'
+fi
+
 export history_ignore="ls *:cd *:pwd:exit::man*:env*:?:??:df *:du *"
 
 function ba_git_curl_debug(){
