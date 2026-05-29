@@ -1,0 +1,24 @@
+{
+  "enabled_providers": [
+    "github-copilot",
+    "ollama"
+  ],
+  "provider": {
+    "ollama": {
+      "name": "Ollama (local)",
+      "npm": "@ai-sdk/openai-compatible",
+      "models": {
+        "llama2": {
+          "name": "Llama 2"
+        },
+        "mistra": {
+          "name": "Mistral"
+        }
+      },
+      "options": {
+        "baseURL": "http://localhost:11434/v1"
+      }
+    }
+  },
+  "$schema": "https://opencode.ai/config.json"
+}
