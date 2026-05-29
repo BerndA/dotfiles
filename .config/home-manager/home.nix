@@ -29,6 +29,7 @@
     pkgs.curl
     pkgs.conmon
     pkgs.crun
+    pkgs.direnv
     pkgs.docker-credential-helpers
     pkgs.dhex
     pkgs.fd

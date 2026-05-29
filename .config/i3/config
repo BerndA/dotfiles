@@ -183,9 +183,8 @@ bindsym Ctrl+Mod1+l exec "loginctl lock-session"
 
 # rofi-pass
 #bindsym $mod+p exec "rofi; notify-send $(which rofi)"
-bindsym $mod+d exec "/usr/bin/rofi -combi-modi window,drun,ssh -theme solarized -font 'hack 10' -show combi -icon-theme 'Papirus' -show-icons"
-#bindsym $mod+g exec "/usr/bin/rofi -dmenu > /tmp/rofi-pass.out 2>&1"
-bindsym $mod+g exec "/home/bahues/bin/rofi-pass > /tmp/rofi-pass.out 2>&1"
+bindsym $mod+d exec "rofi -combi-modi window,drun,ssh -theme solarized -font 'hack 10' -show combi -icon-theme 'Papirus' -show-icons"
+bindsym $mod+g exec "gopass ls --flat | rofi -dmenu -p gopass | xargs --no-run-if-empty gopass show -o | head -n 1 | xdotool type --clearmodifiers --file -"
 
 # Focus the next output (effectively toggles when you only have two outputs)
 bindsym $mod+x move workspace to output next
