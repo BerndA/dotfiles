@@ -46,6 +46,7 @@
     pkgs.gnupg
     pkgs.htop
     pkgs.jq
+    pkgs.jnv
     pkgs.lsd
     pkgs.nss
     pkgs.openssh
