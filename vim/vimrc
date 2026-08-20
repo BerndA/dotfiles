@@ -3,7 +3,7 @@ let g:airline_left_sep='>'
 let iCanHazVundle=1
 let vundle_readme=expand('~/.vim/bundle/Vundle.vim/README.md')
 
-if !filereadable(vundle_readme) 
+if !filereadable(vundle_readme)
 echo "Installing Vundle.."
 echo ""
 silent !mkdir -p ~/.vim/bundle
@@ -41,7 +41,7 @@ Plugin 'christoomey/vim-tmux-navigator'
 "    and
 "    errors
 "    highlighter
-"Plugin        'addltercation/vim-colors-solarized' "        "T-H-E"        colorscheme"            
+"Plugin        'addltercation/vim-colors-solarized' "        "T-H-E"        colorscheme"
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

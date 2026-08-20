@@ -4,9 +4,9 @@
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  imports = [ 
+  imports = [
       ./user.nix
-      ./modules/dotfiles.nix 
+      ./modules/dotfiles.nix
   ];
   home.homeDirectory = "/home/${config.home.username}";
 
@@ -181,7 +181,7 @@
       { path = "${config.dotfiles.repoDir}/.gitconfig"; }
     ];
   };
-  
+
   programs.rofi.pass = {
     enable = true;
   };
@@ -193,7 +193,7 @@
     '';
 
   };
-  
+
 #  programs.vscode = {
 #    enable = true;
 #    package = pkgs.vscode.fhs;
@@ -203,8 +203,7 @@
   };
 
   programs.navi = {
-    enable = true; 
+    enable = true;
     enableZshIntegration = true;
   };
 }
-
