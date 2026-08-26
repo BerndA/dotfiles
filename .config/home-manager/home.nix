@@ -169,6 +169,10 @@
       #plugins = [ "docker" "git" "git-extras" "profiles" "tmux" ];
     #};
   };
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
+  };
 
   programs.fzf = {
     enable = true;
