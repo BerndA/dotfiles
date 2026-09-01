@@ -8,6 +8,6 @@ cat << EOF > user.nix
  home.username = "$USER";
  programs.git.settings.user.name = "$GH_USER";
  programs.git.settings.user.email = "$GH_EMAIL";
- dotfiles = "$(realpath $(pwd)/../..)";
+ dotfiles.repoDir = "$(realpath $(pwd)/../..)";
 }
 EOF

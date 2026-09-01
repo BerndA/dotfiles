@@ -58,6 +58,8 @@ function ba_git_curl_debug(){
 [ -n "$(command -v lsd)" ] && alias ls=lsd
 [ -z "$(command -v rg)" ] && alias rg=rgrep
 
+[ -n "$(command direnv)" ] && eval "$(direnv hook zsh)"
+
 [[ -s "$home/.local/share/marker/marker.sh" ]] && source "$home/.local/share/marker/marker.sh"
 [[ -f '/usr/share/powerline/bindings/zsh/powerline.zsh' ]] && source /usr/share/powerline/bindings/zsh/powerline.zsh
 
