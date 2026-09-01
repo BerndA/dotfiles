@@ -1,0 +1,10 @@
+onboarding = false
+
+[terminal]
+default_shell = "zsh"
+
+[ui.toast]
+delivery = "terminal"
+
+[ui.sound]
+enabled = false
