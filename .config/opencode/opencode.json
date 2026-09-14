@@ -1,24 +1,43 @@
 {
+  "$schema": "https://opencode.ai/config.json",
+  "share": "disabled",
+  "compaction": {
+    "auto": false,
+    "prune": true
+  },
+  "default_agent": "plan",
   "enabled_providers": [
     "github-copilot",
     "ollama"
   ],
+  "model": "ollama/qwen3.5",
+  "plugin": [
+    ["caveman-opencode-plugin@latest", { "intensity": "ultra" }]
+  ],
   "provider": {
     "ollama": {
-      "name": "Ollama (local)",
-      "npm": "@ai-sdk/openai-compatible",
       "models": {
-        "llama2": {
-          "name": "Llama 2"
+        "gemma4": {
+          "_launch": true,
+          "name": "gemma4"
         },
-        "mistra": {
-          "name": "Mistral"
+        "qwen3.5": {
+          "_launch": true,
+          "name": "qwen3.5"
         }
       },
+      "name": "Ollama",
+      "npm": "@ai-sdk/openai-compatible",
       "options": {
-        "baseURL": "http://localhost:11434/v1"
+        "baseURL": "http://10.42.0.1:11434/v1"
       }
     }
   },
-  "$schema": "https://opencode.ai/config.json"
+  "watcher": {
+    "ignore": [
+      "node_modules/**",
+      "dist/**",
+      ".git/**"
+    ]
+  }
 }
