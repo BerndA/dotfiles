@@ -1,10 +1,43 @@
 onboarding = false
+[ui]
+agent_panel_sort = "priority"
+pane_gaps = false
+pane_outer_borders = false
+hide_tab_bar_when_single_tab = true
+sidebar_collapsed_mode = "compact"
 
-[terminal]
-default_shell = "zsh"
-
+status_indicators = "symbols"
+show_agent_labels_on_pane_borders = false
 [ui.toast]
-delivery = "terminal"
+delivery = "system"
 
-[ui.sound]
-enabled = false
+[keys]
+#prefix = "ctrl+a"
+split_vertical = "prefix+%"
+split_horizontal = 'prefix+"'
+
+#[[keys.command]]
+#key = "prefix+f"
+#type = "popup"
+#command = "find ~/data/gh-repos/ -type d -maxdepth 1 -mindepth 1 | fzf"
+#width = "80%"
+#height = "80%"
+
+#[[keys.command]]
+#key = "prefix+v"
+#type = "shell"
+#command = "~/.config/herdr/open-vim-tab.sh"
+
+#[[keys.command]]
+#key = "prefix+p"
+#type = "shell"
+#command = "~/.config/herdr/open-pi-tab.sh"
+
+[[keys.command]]
+key = "prefix+a"
+type = "pane"
+command = "aven"
+
+[theme]
+name = "terminal"
+auto_switch = false

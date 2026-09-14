@@ -104,6 +104,7 @@
   home.file.".config/zsh/zshrc".source = "${config.dotfiles.repoDir}/.config/zsh/zshrc";
   #home.file.".zshenv".source = ~/dotfiles/.config/zsh/zshenv;
   home.file.".ssh/config".source = "${config.dotfiles.repoDir}/ssh/config";
+  home.file.".config/herdr/config.toml".source = "${config.dotfiles.repoDir}/.config/herdr/config.toml"
 
   # if you don't want to manage your shell through Home Manager.
   home.sessionVariables = {
