@@ -65,7 +65,6 @@
     pkgs.tmuxp
     pkgs.trash-cli
     pkgs.up
-    pkgs.watson
     pkgs.zsh
 
     #graphical stuff (disabled)
