@@ -4,4 +4,11 @@ export EDITOR=vim
 export VISUAL=${EDITOR}
 export LOCALE_ARCHIVE=/usr/lib/locale/locale-archive
 
-if [ -e /home/bahues/.nix-profile/etc/profile.d/nix.sh ]; then . /home/bahues/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+
+# Load environment variables from XDG config if present
+if [ -d "$XDG_CONFIG_HOME/env.d" ]; then
+  for file in "$XDG_CONFIG_HOME"/env.d/*; do
+    [ -f "$file" ] && . "$file"
+  done
+fi
