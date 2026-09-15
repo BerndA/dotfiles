@@ -61,7 +61,6 @@ function ba_git_curl_debug(){
 [ -n "$(command direnv)" ] && eval "$(direnv hook zsh)"
 
 [[ -s "$home/.local/share/marker/marker.sh" ]] && source "$home/.local/share/marker/marker.sh"
-[[ -f '/usr/share/powerline/bindings/zsh/powerline.zsh' ]] && source /usr/share/powerline/bindings/zsh/powerline.zsh
 
 if [ "$DOTFILES" != "home-manager" ];then
 #
