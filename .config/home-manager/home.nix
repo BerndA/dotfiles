@@ -48,9 +48,10 @@
     pkgs.jq
     pkgs.jnv
     pkgs.lsd
+    pkgs.navi
+    pkgs.nerd-fonts.jetbrains-mono
     pkgs.nss
     pkgs.openssh
-    pkgs.navi
     pkgs.podman
     pkgs.ripgrep
     pkgs.rdfind
@@ -67,6 +68,7 @@
     pkgs.trash-cli
     pkgs.up
     pkgs.zsh
+    pkgs.zoxide
 
     #graphical stuff (disabled)
     #pkgs.firefox
@@ -206,10 +208,6 @@
 
   };
 
-#  programs.vscode = {
-#    enable = true;
-#    package = pkgs.vscode.fhs;
-#  };
   programs.watson = {
     enableZshIntegration = true;
   };
@@ -232,5 +230,10 @@
 
       # package.disabled = true;
     };
+  };
+
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
   };
 }
