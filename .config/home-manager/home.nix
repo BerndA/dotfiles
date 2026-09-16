@@ -140,7 +140,7 @@
     extraConfig = ''
         set number relativenumber
         colorscheme industry
-        set tabstop=4 shiftwidth=4 expandtab
+        set tabstop=2 shiftwidth=2 expandtab
     '';
  };
 
