@@ -208,10 +208,6 @@
 
   };
 
-  programs.watson = {
-    enableZshIntegration = true;
-  };
-
   programs.navi = {
     enable = true;
     enableZshIntegration = true;
