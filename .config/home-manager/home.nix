@@ -30,6 +30,7 @@
     pkgs.conmon
     pkgs.crun
     pkgs.direnv
+    pkgs.devenv
     pkgs.docker-credential-helpers
     pkgs.dhex
     pkgs.fd
