@@ -1,0 +1,11 @@
+Include ~/.ssh/conf.d/*.cfg
+
+Host *
+    UserKnownHostsFile ~/.ssh/known_hosts.d/%k
+    CanonicalizeHostname yes
+    ControlPath ~/.ssh/cmasters/%r@%h:%p
+    ControlMaster auto
+    ControlPersist 120
+    IdentitiesOnly yes
+    IdentityFile %d/.ssh/keys/id_%h_%r
+    ForwardAgent no

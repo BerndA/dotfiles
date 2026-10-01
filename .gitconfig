@@ -1,0 +1,60 @@
+# This is Git's per-user configuration file.
+[diff]
+	tool = vimdiff
+[merge]
+	log = 20
+[core]
+	autocrlf = input
+	eol = lf
+[push]
+	default = simple
+	followTags = true
+	recurseSubmodules = check
+	autoSetupRemote = true
+        forceIfIncludes = true
+[pull]
+	ff = only
+	rebase = true
+	autoStash = true
+
+[rebase]
+	autoStash = true
+
+[difftool]
+	prompt = true
+	# Be able to abort all diffs with `:cq` or `:cquit`
+	trustExitCode = true
+
+[fetch]
+	prune = true
+
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+
+[color]
+	ui = auto
+
+[include]
+	path = ~/.config/git/includes/local
+
+[init]
+	defaultBranch = main
+
+[protocol "file"]
+	allow = always
+
+[alias]
+	tree = log --graph --pretty=format:'%Cred%h%Creset - %C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an> %Creset' --abbrev-commit
+	d = difftool
+	st = status
+	ci = commit
+	br = branch
+	co = checkout
+	p  = push --force-with-lease --force-if-includes
+	ria = rebase --interactive --autosquash
+	l = pull --rebase --autostash
+	f = fetch --prune-tags --prune
+    gone = "!f() { git fetch --all --prune; git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D; }; f"

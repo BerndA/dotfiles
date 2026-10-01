@@ -1,9 +1,9 @@
 " Setting up Vundle - the vim plugin bundler
-  let g:airline_left_sep='>'
+let g:airline_left_sep='>'
 let iCanHazVundle=1
 let vundle_readme=expand('~/.vim/bundle/Vundle.vim/README.md')
 
-if !filereadable(vundle_readme) 
+if !filereadable(vundle_readme)
 echo "Installing Vundle.."
 echo ""
 silent !mkdir -p ~/.vim/bundle
@@ -22,8 +22,6 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'SirVer/ultisnips'
 Plugin 'aperezdc/vim-template'
 Plugin 'rdnetto/YCM-Generator'
@@ -32,8 +30,9 @@ Plugin 'gitv'
 Plugin 'Tabular'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'ctrlp.vim'
+#Plugin 'ctrlp.vim'
 Plugin 'Tagbar'
+Plugin 'christoomey/vim-tmux-navigator'
 
 "    Plugin
 "    'Syntastic' uber
@@ -42,7 +41,7 @@ Plugin 'Tagbar'
 "    and
 "    errors
 "    highlighter
-"Plugin        'addltercation/vim-colors-solarized' "        "T-H-E"        colorscheme"            
+"Plugin        'addltercation/vim-colors-solarized' "        "T-H-E"        colorscheme"
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -67,9 +66,23 @@ let g:airline_theme = 'powerlineish'
 let g:airline#extensions#hunks#enabled=0
 let g:airline#extensions#branch#enabled=1
 
+let g:username='bahues'
+let g:email='bahues@rosen-group.com'
+
 if !exists('g:airline_symbols')
 	  let g:airline_symbols = {}
 endif
 let g:airline_symbols.space = "\ua0"
 
 set laststatus=2
+set expandtab
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+
+command! -nargs=1 -range SuperRetab <line1>,<line2>s/\v%(^ *)@<= {<args>}/\t/g
+command! -range=% -nargs=0 Tab2Space execute '<line1>,<line2>s#^\t\+#\=repeat(" ", len(submatch(0))*' . &ts . ')'
+command! -range=% -nargs=0 Space2Tab execute '<line1>,<line2>s#^\( \{'.&ts.'\}\)\+#\=repeat("\t", len(submatch(0))/' . &ts . ')'
+map <F7> mzgg=G`z
+
+autocmd BufWritePre * :%s/\s\+$//e

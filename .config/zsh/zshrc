@@ -1,0 +1,84 @@
+# load zplug
+[ -s "${HOME}/locale.sh" ] && source "${HOME}/locale.sh"
+
+# specify plugins here
+
+if [ "$DOTFILES" != "home-manager" ];then
+# Bundles from the default repo (robbyrussell's oh-my-zsh).
+#zplug "plugins/docker" from:oh-my-zsh
+#zplug "plugins/tmux" from:oh-my-zsh
+
+# Syntax highlighting bundle.
+zplug "zsh-users/zsh-syntax-highlighting"
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-history-substring-search"
+fi
+
+# hide username@host in prompt
+export default_user="$user"
+
+export history_ignore="ls *:cd *:pwd:exit::man*:env*:?:??:df *:du *"
+docker_debug() {
+	docker commit $1 docker_debug/debug_image && docker run --rm -it docker_debug/debug_image /bin/bash
+}
+alias docker-debug=docker_debug
+
+##### GIT #####
+
+#find all changes to filename not merged to master:
+alias ba_git_find_all_branches='git for-each-ref --format="%(refname:short)" refs/heads | grep -v master | while read br; do git cherry master $br | while read x h; do if [ \"`git log -n 1 --format=%h $h -- $filename`\" = \"$h\" ]; then echo $br; fi; done; done | sort -u'
+
+alias g=git
+alias gbg='LANG=C git branch -vv | grep ": gone\]"'
+alias gbgD='LANG=C git branch --no-color -vv | grep ": gone\]" | cut -c 3- | awk '\''{print $1}'\'' | xargs git branch -D'
+alias gbgd='LANG=C git branch --no-color -vv | grep ": gone\]" | cut -c 3- | awk '\''{print $1}'\'' | xargs git branch -d'
+alias gpsup='git push --set-upstream $(git rev-parse --abbrev-ref HEAD)'
+
+if [ -n "$(command -v xsel)" ];then
+    alias pbcopy='xsel --clipboard --input'
+    alias pbpaste='xsel --clipboard --output'
+fi
+
+export history_ignore="ls *:cd *:pwd:exit::man*:env*:?:??:df *:du *"
+
+function ba_git_curl_debug(){
+    if [[ -z "$GIT_CURL_VERBOSE" ]]; then
+        echo "turning on git debugging"
+        export GIT_CURL_VERBOSE=1
+        export GIT_TRACE=1
+    else
+        echo "turning off git debugging"
+        unset GIT_CURL_VERBOSE
+        unset GIT_TRACE
+    fi
+}
+
+#####
+[ -n "$(command -v bat)" ] && alias cat=bat
+[ -n "$(command -v lsd)" ] && alias ls=lsd
+[ -n "$(command -v trash)" ] && alias rip=trash
+[ -z "$(command -v rg)" ] && alias rg=rgrep
+
+[ -n "$(command direnv)" ] && eval "$(direnv hook zsh)"
+
+[[ -s "$home/.local/share/marker/marker.sh" ]] && source "$home/.local/share/marker/marker.sh"
+
+if [ "$DOTFILES" != "home-manager" ];then
+#
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
+# Then, source plugins and add commands to $PATH
+zplug load --verbose
+fi
+
+setopt INTERACTIVE_COMMENTS
+setopt APPEND_HISTORY
+setopt INC_APPEND_HISTORY
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE

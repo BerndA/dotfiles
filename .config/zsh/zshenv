@@ -1,0 +1,14 @@
+export ZSH_TMUX_AUTOSTART="true"
+export ZSH_TMUX_AUTOQUIT="false"
+export EDITOR=vim
+export VISUAL=${EDITOR}
+export LOCALE_ARCHIVE=/usr/lib/locale/locale-archive
+
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+
+# Load environment variables from XDG config if present
+if [ -d "$XDG_CONFIG_HOME/env.d" ]; then
+  for file in "$XDG_CONFIG_HOME"/env.d/*; do
+    [ -f "$file" ] && . "$file"
+  done
+fi
