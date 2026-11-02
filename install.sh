@@ -96,15 +96,39 @@ ENV_EOF
 
 # Home-manager Setup
 setup_home_manager() {
-    if [[ ! -f "$DOTFILES_DIR/flake.nix" ]]; then
-        log_info "No flake.nix found in dotfiles dir"
-        return 0
-    fi
-    
-    if [[ ! -f "$HOME/.flake.nix" ]]; then
-        ln -s "$DOTFILES_DIR/flake.nix" "$HOME/.flake.nix"
-        log_success "Linked flake.nix"
-    fi
+  home-manager switch
+}
+
+setup_ssh() {
+  mkdir -p "$HOME/.ssh/conf.d" || return 1
+
+  CONFIG_FILE="$HOME/.ssh/config"
+  SSH_CONTENT_DIR="${DOTFILES_DIR}/ssh"
+  SSH_SOURCE_FILE="$SSH_CONTENT_DIR/main"
+  START_MARKER="# --- DOTFILES START ---"
+  END_MARKER="# --- DOTFILES END ---"
+
+  # Check if SSH content source file exists
+  if [[ ! -f "$SSH_SOURCE_FILE" ]]; then
+    log_warn "SSH source file $SSH_SOURCE_FILE not found, skipping SSH config update."
+    return 0
+  fi
+
+  touch "${CONFIG_FILE}"
+
+  # Check if marker exists
+  if grep -qF "$START_MARKER" "$CONFIG_FILE"; then
+    # Marker exists, append content after it to ensure latest version, and avoid massive diffing.
+    sed -i -e "/$START_MARKER/,/$END_MARKER/{//!d}" -e "/$START_MARKER/r $SSH_SOURCE_FILE" "$CONFIG_FILE"
+  else
+    # Marker missing, append new section.
+    echo "$START_MARKER" >> "$CONFIG_FILE"
+    cat "$SSH_SOURCE_FILE" >> "$CONFIG_FILE"
+    echo "$END_MARKER" >> "$CONFIG_FILE"
+    log_success "Appended SSH config content"
+  fi
+
+  cp "${SSH_CONTENT_DIR}/00_default.cfg" "$HOME/.ssh/conf.d/"
 }
 
 # Main
@@ -120,6 +144,7 @@ main() {
         install_minimal
     fi
     
+    setup_ssh
     setup_zsh
     
     log_success "Installation completed"

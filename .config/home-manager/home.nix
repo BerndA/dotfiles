@@ -107,7 +107,9 @@
   # Raw configuration files
   home.file.".config/zsh/zshrc".source = "${config.dotfiles.repoDir}/.config/zsh/zshrc";
   home.file.".config/zsh/zshenv".source = "${config.dotfiles.repoDir}/.config/zsh/zshenv";
-  home.file.".ssh/config".source = "${config.dotfiles.repoDir}/ssh/config";
+
+  # SSH
+  home.file.".ssh/conf.d/00_default.cfg".source = "${config.dotfiles.repoDir}/ssh/00_default.cfg";
 
   # if you don't want to manage your shell through Home Manager.
   home.sessionVariables = {
