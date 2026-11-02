@@ -108,8 +108,6 @@
   home.file.".config/zsh/zshrc".source = "${config.dotfiles.repoDir}/.config/zsh/zshrc";
   home.file.".config/zsh/zshenv".source = "${config.dotfiles.repoDir}/.config/zsh/zshenv";
   home.file.".ssh/config".source = "${config.dotfiles.repoDir}/ssh/config";
-  home.file.".config/herdr/config.toml".source = "${config.dotfiles.repoDir}/.config/herdr/config.toml";
-  home.file.".config/opencode/opencode.json".source = "${config.dotfiles.repoDir}/.config/opencode/opencode.json";
 
   # if you don't want to manage your shell through Home Manager.
   home.sessionVariables = {
