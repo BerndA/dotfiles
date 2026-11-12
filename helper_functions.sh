@@ -18,45 +18,35 @@ sync_repo_to_home() {
     local timestamp=$(date +%Y%m%d_%H%M%S)
     local target_dir="${HOME}/${base_name}_backup_${timestamp}"
     
-    local exclude_file=""
+    # --- Setup ---
+    local repo_root=$(pwd)
+    local base_name=$(basename "${repo_root}")
+    local timestamp=$(date +%Y%m%d_%H%M%S)
+    local target_dir="${HOME}/${base_name}_backup_${timestamp}"
+    
+    local exclude_file="${repo_root}/.config/exclude"
     local rsync_options=""
     local found_exclusions=0
     
-    # Argument parsing for optional exclusion file
-    while [[ "$#" -gt 0 ]]; do
-        case "$1" in
-            --exclude)
-                if [ -n "$2" ] && [ "${2:0:1}" != - ]; then
-                    exclude_file="$2"
-                    shift # past argument
-                else
-                    echo "Error: --exclude requires a file path." >&2
-                    return 1
-                fi
-                shift # past value
-                ;;
-            *)
-                echo "Warning: Unknown parameter passed: $1 (Ignoring)" >&2
-                ;;
-        esac
-        shift # Consume the argument whether it was a flag or a value
-    done
-
-    # --- Core Logic ---
-    
-    # Determine rsync options and validation
-    if [ -n "${exclude_file}" ]; then
-        if [ ! -f "${exclude_file}" ]; then
-            echo "Error: Exclusion file not found at ${exclude_file}" >&2
-            return 1
-        fi
-        echo "Exclusion File: ${exclude_file}"
+    # Check if the hardcoded exclusion file exists
+    if [ -f "${exclude_file}" ]; then
+        echo "Using exclusion file: ${exclude_file}"
         # Construct the exclusion option string
         rsync_options="--exclude-from=\"${exclude_file}\""
         found_exclusions=1
     else
+        echo "Exclusion file not found at ${exclude_file}. Syncing everything."
         rsync_options=""
     fi
+    # --- Core Logic ---
+    
+     # Determine rsync options and validation
+     if [ "$found_exclusions" -eq 1 ]; then
+         # The options are already set in setup
+         : # No action needed here, rsync_options is set
+     else
+         rsync_options=""
+     fi
 
     # Create the target directory first
     mkdir -p "${target_dir}"
@@ -73,6 +63,8 @@ sync_repo_to_home() {
     
     # Use eval to correctly expand potentially complex variables like rsync_options
     SYNC_COMMAND="rsync -av ${rsync_options} \"${repo_root}/\" \"${target_dir}\""
+    
+    echo "Executing command: ${SYNC_COMMAND}"
     
     echo "Executing command: ${SYNC_COMMAND}"
     
