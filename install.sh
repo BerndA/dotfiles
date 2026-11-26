@@ -131,6 +131,11 @@ setup_ssh() {
   cp "${SSH_CONTENT_DIR}/00_default.cfg" "$HOME/.ssh/conf.d/"
 }
 
+setup_git(){
+  cp ${DOTFILES_DIR}/.config/git/settings ${HOME}/.config/git/settings
+}
+
+
 # Main
 main() {
     echo "Starting installation..."
@@ -144,6 +149,7 @@ main() {
         install_minimal
     fi
     
+    setup_git
     setup_ssh
     setup_zsh
     
