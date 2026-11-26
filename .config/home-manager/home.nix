@@ -109,7 +109,7 @@
   home.file.".config/zsh/zshenv".source = "${config.dotfiles.repoDir}/.config/zsh/zshenv";
 
   # SSH
-  home.file.".ssh/conf.d/00_default.cfg".source = "${config.dotfiles.repoDir}/ssh/00_default.cfg";
+  #home.file.".ssh/conf.d/00_default.cfg".source = "${config.dotfiles.repoDir}/ssh/00_default.cfg";
 
   # if you don't want to manage your shell through Home Manager.
   home.sessionVariables = {
@@ -193,7 +193,8 @@
   programs.git = {
     enable = true;
     includes = [
-      { path = "${config.dotfiles.repoDir}/.gitconfig"; }
+      { path = "~/.config/git/settings"; }
+      { path = "~/.config/git/includes/local"; }
     ];
   };
 
